@@ -12,12 +12,17 @@
  */
 #include <linux/moduleparam.h>
 #include <drm/msm_drm_pp.h>
+#include <dsi_panel.h>
 #include "sde_hw_color_proc_common_v4.h"
 #include "sde_hw_color_proc_v4.h"
 
-static unsigned short kcal_red = 256;
-static unsigned short kcal_green = 256;
-static unsigned short kcal_blue = 256;
+// Prevent image retention on nt36672a tianma panel
+// Ref: https://forum.xda-developers.com/-/-t4075133
+static int kcal = is_tianma_panel() ? 230 : 256;
+
+static unsigned short kcal_red = kcal;
+static unsigned short kcal_green = kcal;
+static unsigned short kcal_blue = kcal;
 static unsigned short kcal_hue = 0;
 static unsigned short kcal_sat = 255;
 static unsigned short kcal_val = 255;
